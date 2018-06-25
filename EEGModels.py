@@ -39,13 +39,12 @@
 
 from keras.models import Model
 from keras.layers.core import Dense, Activation, Permute, Dropout
-from keras.layers.convolutional import Conv2D, MaxPooling2D, AveragePooling2D
+from keras.layers.convolutional import Conv2D, MaxPooling2D, AveragePooling2D, DepthwiseConv2D
 from keras.layers.convolutional import SeparableConv2D
 from keras.layers.normalization import BatchNormalization
 from keras.layers import SpatialDropout2D
 from keras.regularizers import l1_l2
 from keras.layers import Input, Flatten
-from keras.applications.mobilenet import DepthwiseConv2D
 import keras.backend as K
 from keras.constraints import max_norm
 
