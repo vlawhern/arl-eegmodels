@@ -289,8 +289,8 @@ def DeepConvNet(nb_classes, Chans = 64, Samples = 256,
     with the original authors.
     
                       ours        original paper
-    pool_size        1, 2        1, 5
-    strides          1, 2        1, 5
+    pool_size        1, 2        1, 3
+    strides          1, 2        1, 3
     conv filters     1, 5        1, 10
     
     Note that this implementation has not been verified by the original 
