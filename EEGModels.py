@@ -302,7 +302,7 @@ def DeepConvNet(nb_classes, Chans = 64, Samples = 256,
     input_main   = Input((1, Chans, Samples))
     block1       = Conv2D(25, (1, 5), 
                                  input_shape=(1, Chans, Samples),
-                                 kernel_constraint = max_norm(2., axis=(0,1,2))(input_main)
+                                 kernel_constraint = max_norm(2., axis=(0,1,2)))(input_main)
     block1       = Conv2D(25, (Chans, 1),
                                  kernel_constraint = max_norm(2., axis=(0,1,2)))(block1)
     block1       = BatchNormalization(axis=1, epsilon=1e-05, momentum=0.1)(block1)
