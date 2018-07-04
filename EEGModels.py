@@ -3,10 +3,9 @@
  Signal Processing and Classification, using Keras and Tensorflow
 
  Requirements:
-    (1) Keras >= 2.1.3
-    (2) Tensorflow >= 1.5
-    (3) 'image_data_format' = 'channels_first' in keras.json config
-    (4) Data shape = (trials, kernels, channels, samples), which for the 
+    (1) Tensorflow == 1.8
+    (2) 'image_data_format' = 'channels_first' in keras.json config
+    (3) Data shape = (trials, kernels, channels, samples), which for the 
         input layer, will be (trials, 1, channels, samples). 
     
  To use:
@@ -37,17 +36,16 @@
  distribution. 
 """
 
-from keras.models import Model
-from keras.layers.core import Dense, Activation, Permute, Dropout
-from keras.layers.convolutional import Conv2D, MaxPooling2D, AveragePooling2D
-from keras.layers.convolutional import SeparableConv2D
-from keras.layers.normalization import BatchNormalization
-from keras.layers import SpatialDropout2D
-from keras.regularizers import l1_l2
-from keras.layers import Input, Flatten
-from keras.applications.mobilenet import DepthwiseConv2D
-import keras.backend as K
-from keras.constraints import max_norm
+from tensorflow.python.keras.models import Model
+from tensorflow.python.keras.layers import Dense, Activation, Permute, Dropout
+from tensorflow.python.keras.layers import Conv2D, MaxPooling2D, AveragePooling2D
+from tensorflow.python.keras.layers import SeparableConv2D, DepthwiseConv2D
+from tensorflow.python.keras.layers import BatchNormalization
+from tensorflow.python.keras.layers import SpatialDropout2D
+from tensorflow.python.keras.regularizers import l1_l2
+from tensorflow.python.keras.layers import Input, Flatten
+from tensorflow.python.keras.constraints import max_norm
+from tensorflow.python.keras import backend as K
 
 
 def EEGNet(nb_classes, Chans = 64, Samples = 128, 
