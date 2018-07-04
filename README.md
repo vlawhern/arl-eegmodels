@@ -68,7 +68,8 @@ fittedModel    = model.fit(...)
 # the DeepLIFT method in the paper, although other options, including epsilon-LRP, are available.
 # This works with all implemented models. 
 
-# here, Y_test and X_test are the one-hot encodings of the class labels. 
+# here, Y_test and X_test are the one-hot encodings of the class labels and
+# the data, respectively. 
 
 with DeepExplain(session = K.get_session()) as de:
 	input_tensor = model.layers[0].input
