@@ -53,9 +53,9 @@ To reproduce the EEGNet single-trial feature relevance results as we reported in
 
 ```python
 from EEGModels import EEGNet
-from keras.models import Model
+from tensorflow.python.keras.models import Model
 from deepexplain.tensorflow import DeepExplain
-import keras.backend as K
+from tensorflow.python.keras import backend as K
 
 # configure, compile and fit the model
  
