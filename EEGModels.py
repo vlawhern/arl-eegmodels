@@ -3,7 +3,7 @@
  Signal Processing and Classification, using Keras and Tensorflow
 
  Requirements:
-    (1) Tensorflow == 1.8
+    (1) Tensorflow == 1.8.0
     (2) 'image_data_format' = 'channels_first' in keras.json config
     (3) Data shape = (trials, kernels, channels, samples), which for the 
         input layer, will be (trials, 1, channels, samples). 
@@ -50,7 +50,7 @@ from tensorflow.python.keras import backend as K
 
 def EEGNet(nb_classes, Chans = 64, Samples = 128, 
              dropoutRate = 0.25, kernLength = 64, F1 = 4, 
-             D = 2, F2 = 8, dropoutType = 'Dropout'):
+             D = 2, F2 = 8, norm_rate = 0.25, dropoutType = 'Dropout'):
     """ Keras Implementation of EEGNet (https://arxiv.org/abs/1611.08024)
 
     Note that this implements the newest version of EEGNet and NOT the earlier
@@ -145,7 +145,7 @@ def EEGNet(nb_classes, Chans = 64, Samples = 128,
     flatten      = Flatten(name = 'flatten')(block2)
     
     dense        = Dense(nb_classes, name = 'dense', 
-                         kernel_constraint = max_norm(0.25))(flatten)
+                         kernel_constraint = max_norm(norm_rate))(flatten)
     softmax      = Activation('softmax', name = 'softmax')(dense)
     
     return Model(inputs=input1, outputs=softmax)
