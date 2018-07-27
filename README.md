@@ -89,18 +89,15 @@ with DeepExplain(session = K.get_session()) as de:
 If you use the EEGNet model in your research and found it helpful, please cite the following paper:
 
 ```
-@article{LawhernSWGHL16,
-  author    = {Vernon J. Lawhern and
-               Amelia J. Solon and
-               Nicholas R. Waytowich and
-               Stephen M. Gordon and
-               Chou P. Hung and
-               Brent J. Lance},
-  title     = {EEGNet: {A} Compact Convolutional Network for EEG-based Brain-Computer
-               Interfaces},
-  journal   = {arXiv preprint arXiv:1611.08024},
-  year      = {2016},
-  url       = {http://arxiv.org/abs/1611.08024}
+@article{Lawhern2018,
+  author={Vernon J Lawhern and Amelia J Solon and Nicholas R Waytowich and Stephen M Gordon and Chou P Hung and Brent J Lance},
+  title={EEGNet: a compact convolutional neural network for EEG-based brain–computer interfaces},
+  journal={Journal of Neural Engineering},
+  volume={15},
+  number={5},
+  pages={056013},
+  url={http://stacks.iop.org/1741-2552/15/i=5/a=056013},
+  year={2018}
 }
 ```
 
