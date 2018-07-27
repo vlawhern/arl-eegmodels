@@ -14,7 +14,7 @@ This is the Army Research Laboratory (ARL) EEGModels project: A Collection of Co
 
 # Models Implemented
 
-- EEGNet [[1]](https://arxiv.org/abs/1611.08024). Both the original model and the revised model are implemented.
+- EEGNet [[1]](http://stacks.iop.org/1741-2552/15/i=5/a=056013). Both the original model and the revised model are implemented.
 - EEGNet variant used for classification of Steady State Visual Evoked Potential (SSVEP) Signals [[2]](https://arxiv.org/abs/1803.04566)
 - DeepConvNet [[3]](https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.23730)
 - ShallowConvNet [[3]](https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.23730)
@@ -49,7 +49,7 @@ predicted      = model.predict(...)
 
 # EEGNet Feature Explainability
 
-To reproduce the EEGNet single-trial feature relevance results as we reported in [[1]](https://arxiv.org/abs/1611.08024), download and install DeepExplain located [[here]](https://github.com/marcoancona/DeepExplain), which implements a variety of relevance attribution methods (both gradient-based and perturbation-based). A sketch of how to use it is given below:
+To reproduce the EEGNet single-trial feature relevance results as we reported in [[1]](http://stacks.iop.org/1741-2552/15/i=5/a=056013), download and install DeepExplain located [[here]](https://github.com/marcoancona/DeepExplain), which implements a variety of relevance attribution methods (both gradient-based and perturbation-based). A sketch of how to use it is given below:
 
 ```python
 from EEGModels import EEGNet
