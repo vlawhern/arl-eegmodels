@@ -8,7 +8,7 @@ This is the Army Research Laboratory (ARL) EEGModels project: A Collection of Co
 # Requirements
 
 - Python (either 2.7 or 3.6)
-- Tensorflow == 1.8.0
+- Tensorflow == 1.9.0
 - Keras variable 'image_data_format' = "channels_first" in keras.json configuration file
 - Data shape = (trials, kernels, channels, samples), which for the input layer, will be (trials, 1, channels, samples). 
 
@@ -53,13 +53,13 @@ To reproduce the EEGNet single-trial feature relevance results as we reported in
 
 ```python
 from EEGModels import EEGNet
-from tensorflow.python.keras.models import Model
+from tensorflow.keras.models import Model
 from deepexplain.tensorflow import DeepExplain
-from tensorflow.python.keras import backend as K
+from tensorflow.keras import backend as K
 
 # configure, compile and fit the model
  
-model  = EEGNet(nb_classes = ..., Chans = ..., Samples = ...)
+model          = EEGNet(nb_classes = ..., Chans = ..., Samples = ...)
 model.compile(loss = 'categorical_crossentropy', optimizer = 'adam')
 fittedModel    = model.fit(...)
 
@@ -72,12 +72,12 @@ fittedModel    = model.fit(...)
 # the data, respectively. 
 
 with DeepExplain(session = K.get_session()) as de:
-	input_tensor = model.layers[0].input
-	fModel = Model(inputs = input_tensor, outputs = model.layers[-2].output)    
-	target_tensor = fModel(input_tensor)    
+	input_tensor   = model.layers[0].input
+	fModel         = Model(inputs = input_tensor, outputs = model.layers[-2].output)    
+	target_tensor  = fModel(input_tensor)    
 
 	# can use epsilon-LRP as well if you like.
-	attributions = de.explain('deeplift', target_tensor * Y_test, input_tensor, X_test)
+	attributions   = de.explain('deeplift', target_tensor * Y_test, input_tensor, X_test)
 	# attributions = de.explain('elrp', target_tensor * Y_test, input_tensor, X_test)	
 
 
