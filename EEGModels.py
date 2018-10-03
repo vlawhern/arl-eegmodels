@@ -153,61 +153,72 @@ def EEGNet(nb_classes, Chans = 64, Samples = 128,
 
 
 
-def EEGNet_SSVEP(nb_classes, Chans = 64, Samples = 128, regRate = 0.0001,
-           dropoutRate = 0.25, kernLength = 64, numFilters = 8):
-    """ Keras Implementation of the variant of EEGNet that was used to classify
-    signals from an SSVEP task (https://arxiv.org/abs/1803.04566)
+def EEGNet_SSVEP(nb_classes = 12, Chans = 8, Samples = 256, 
+             dropoutRate = 0.5, kernLength = 256, F1 = 96, 
+             D = 1, F2 = 96, dropoutType = 'Dropout'):
+    """ SSVEP Variant of EEGNet, as used in [1]. 
 
-       
     Inputs:
         
-        nb_classes     : int, number of classes to classify
-        Chans, Samples : number of channels and time points in the EEG data
-        regRate        : regularization parameter for L1 and L2 penalties
-        dropoutRate    : dropout fraction
-        kernLength     : length of temporal convolution in first layer
-        numFilters     : number of temporal-spatial filter pairs to learn
-    
-    """
+      nb_classes      : int, number of classes to classify
+      Chans, Samples  : number of channels and time points in the EEG data
+      dropoutRate     : dropout fraction
+      kernLength      : length of temporal convolution in first layer. We found
+                        that setting this to be half the sampling rate worked
+                        well in practice. For the SMR dataset in particular
+                        since the data was high-passed at 4Hz we used a kernel
+                        length of 32.     
+      F1, F2          : number of temporal filters (F1) and number of pointwise
+                        filters (F2) to learn. Default: F1 = 4, F2 = F1 * D. 
+      D               : number of spatial filters to learn within each temporal
+                        convolution. Default: D = 2
+      dropoutType     : Either SpatialDropout2D or Dropout, passed as a string.
+      
+      
+    [1]. Waytowich, N. et. al. (2018). Compact Convolutional Neural Networks
+    for Classification of Asynchronous Steady-State Visual Evoked Potentials.
+    Journal of Neural Engineering. 
+    http://iopscience.iop.org/article/10.1088/1741-2552/aae5d8
 
+    """
+    
+    if dropoutType == 'SpatialDropout2D':
+        dropoutType = SpatialDropout2D
+    elif dropoutType == 'Dropout':
+        dropoutType = Dropout
+    else:
+        raise ValueError('dropoutType must be one of SpatialDropout2D '
+                         'or Dropout, passed as a string.')
+    
     input1   = Input(shape = (1, Chans, Samples))
 
     ##################################################################
-    layer1       = Conv2D(numFilters, (1, kernLength), padding = 'same',
-                          kernel_regularizer = l1_l2(l1=0.0, l2=0.0),
-                          input_shape = (1, Chans, Samples),
-                          use_bias = False)(input1)
-    layer1       = BatchNormalization(axis = 1)(layer1)
-    layer1       = DepthwiseConv2D((Chans, 1), 
-                              depthwise_regularizer = l1_l2(l1=regRate, l2=regRate),
-                              use_bias = False)(layer1)
-    layer1       = BatchNormalization(axis = 1)(layer1)
-    layer1       = Activation('elu')(layer1)
-    layer1       = SpatialDropout2D(dropoutRate)(layer1)
+    block1       = Conv2D(F1, (1, kernLength), padding = 'same',
+                                   input_shape = (1, Chans, Samples),
+                                   use_bias = False)(input1)
+    block1       = BatchNormalization(axis = 1)(block1)
+    block1       = DepthwiseConv2D((Chans, 1), use_bias = False, 
+                                   depth_multiplier = D,
+                                   depthwise_constraint = max_norm(1.))(block1)
+    block1       = BatchNormalization(axis = 1)(block1)
+    block1       = Activation('elu')(block1)
+    block1       = AveragePooling2D((1, 4))(block1)
+    block1       = dropoutType(dropoutRate)(block1)
     
-    layer2       = SeparableConv2D(numFilters, (1, 8), 
-                              depthwise_regularizer=l1_l2(l1=0.0, l2=regRate),
-                              use_bias = False, padding = 'same')(layer1)
-    layer2       = BatchNormalization(axis=1)(layer2)
-    layer2       = Activation('elu')(layer2)
-    layer2       = AveragePooling2D((1, 4))(layer2)
-    layer2       = SpatialDropout2D(dropoutRate)(layer2)
-    
-    layer3       = SeparableConv2D(numFilters*2, (1, 8), depth_multiplier = 2,
-                              depthwise_regularizer=l1_l2(l1=0.0, l2=regRate), 
-                              use_bias = False, padding = 'same')(layer2)
-    layer3       = BatchNormalization(axis=1)(layer3)
-    layer3       = Activation('elu')(layer3)
-    layer3       = AveragePooling2D((1, 4))(layer3)
-    layer3       = SpatialDropout2D(dropoutRate)(layer3)
-    
-    
-    flatten      = Flatten(name = 'flatten')(layer3)
+    block2       = SeparableConv2D(F2, (1, 16),
+                                   use_bias = False, padding = 'same')(block1)
+    block2       = BatchNormalization(axis = 1)(block2)
+    block2       = Activation('elu')(block2)
+    block2       = AveragePooling2D((1, 8))(block2)
+    block2       = dropoutType(dropoutRate)(block2)
+        
+    flatten      = Flatten(name = 'flatten')(block2)
     
     dense        = Dense(nb_classes, name = 'dense')(flatten)
     softmax      = Activation('softmax', name = 'softmax')(dense)
     
     return Model(inputs=input1, outputs=softmax)
+
 
 
 def EEGNet_old(nb_classes, Chans = 64, Samples = 128, regRate = 0.0001,

@@ -15,7 +15,7 @@ This is the Army Research Laboratory (ARL) EEGModels project: A Collection of Co
 # Models Implemented
 
 - EEGNet [[1]](http://stacks.iop.org/1741-2552/15/i=5/a=056013). Both the original model and the revised model are implemented.
-- EEGNet variant used for classification of Steady State Visual Evoked Potential (SSVEP) Signals [[2]](https://arxiv.org/abs/1803.04566)
+- EEGNet variant used for classification of Steady State Visual Evoked Potential (SSVEP) Signals [[2]](http://iopscience.iop.org/article/10.1088/1741-2552/aae5d8)
 - DeepConvNet [[3]](https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.23730)
 - ShallowConvNet [[3]](https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.23730)
 
@@ -114,9 +114,9 @@ If you use the SSVEP variant of the EEGNet model in your research and found it h
                Jean M. Vettel},
   title     = {Compact Convolutional Neural Networks for Classification of Asynchronous
                Steady-state Visual Evoked Potentials},
-  journal   = {arXiv preprint arXiv:1803.04566},
-  year      = {2018},
-  url       = {http://arxiv.org/abs/1803.04566}
+  journal   = {Journal of Neural Engineering},
+  year      = {In press},
+  url       = {http://iopscience.iop.org/article/10.1088/1741-2552/aae5d8}
 }
 ```
 
