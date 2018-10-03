@@ -163,15 +163,11 @@ def EEGNet_SSVEP(nb_classes = 12, Chans = 8, Samples = 256,
       nb_classes      : int, number of classes to classify
       Chans, Samples  : number of channels and time points in the EEG data
       dropoutRate     : dropout fraction
-      kernLength      : length of temporal convolution in first layer. We found
-                        that setting this to be half the sampling rate worked
-                        well in practice. For the SMR dataset in particular
-                        since the data was high-passed at 4Hz we used a kernel
-                        length of 32.     
+      kernLength      : length of temporal convolution in first layer
       F1, F2          : number of temporal filters (F1) and number of pointwise
-                        filters (F2) to learn. Default: F1 = 4, F2 = F1 * D. 
+                        filters (F2) to learn. 
       D               : number of spatial filters to learn within each temporal
-                        convolution. Default: D = 2
+                        convolution.
       dropoutType     : Either SpatialDropout2D or Dropout, passed as a string.
       
       
