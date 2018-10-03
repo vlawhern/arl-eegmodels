@@ -51,7 +51,8 @@ from tensorflow.keras import backend as K
 def EEGNet(nb_classes, Chans = 64, Samples = 128, 
              dropoutRate = 0.25, kernLength = 64, F1 = 4, 
              D = 2, F2 = 8, norm_rate = 0.25, dropoutType = 'Dropout'):
-    """ Keras Implementation of EEGNet (https://arxiv.org/abs/1611.08024)
+    """ Keras Implementation of EEGNet
+    http://iopscience.iop.org/article/10.1088/1741-2552/aace8c/meta
 
     Note that this implements the newest version of EEGNet and NOT the earlier
     version (version v1 and v2 on arxiv). We strongly recommend using this
