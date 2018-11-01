@@ -174,7 +174,7 @@ def EEGNet_SSVEP(nb_classes = 12, Chans = 8, Samples = 256,
       
     [1]. Waytowich, N. et. al. (2018). Compact Convolutional Neural Networks
     for Classification of Asynchronous Steady-State Visual Evoked Potentials.
-    Journal of Neural Engineering. 
+    Journal of Neural Engineering vol. 15(6). 
     http://iopscience.iop.org/article/10.1088/1741-2552/aae5d8
 
     """
