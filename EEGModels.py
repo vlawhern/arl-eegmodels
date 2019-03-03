@@ -3,10 +3,17 @@
  Signal Processing and Classification, using Keras and Tensorflow
 
  Requirements:
-    (1) Tensorflow == 1.9.0
+    (1) Tensorflow == 1.12.0
     (2) 'image_data_format' = 'channels_first' in keras.json config
     (3) Data shape = (trials, kernels, channels, samples), which for the 
-        input layer, will be (trials, 1, channels, samples). 
+        input layer, will be (trials, 1, channels, samples).
+ 
+ To run the EEG/MEG ERP classification sample script, you will also need
+
+    (4) mne >= 0.17.1
+    (5) PyRiemann >= 0.2.5
+    (6) scikit-learn >= 0.20.1
+    (7) matplotlib >= 2.2.3
     
  To use:
     

@@ -8,9 +8,16 @@ This is the Army Research Laboratory (ARL) EEGModels project: A Collection of Co
 # Requirements
 
 - Python (either 2.7 or 3.6)
-- Tensorflow == 1.9.0
+- Tensorflow == 1.12.0
 - Keras variable 'image_data_format' = "channels_first" in keras.json configuration file
 - Data shape = (trials, kernels, channels, samples), which for the input layer, will be (trials, 1, channels, samples). 
+
+To run the EEG/MEG ERP classification sample script, you will also need
+
+- mne >= 0.17.1
+- PyRiemann >= 0.2.5
+- scikit-learn >= 0.20.1
+- matplotlib >= 2.2.3
 
 # Models Implemented
 
