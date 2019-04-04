@@ -3,7 +3,7 @@
  Signal Processing and Classification, using Keras and Tensorflow
 
  Requirements:
-    (1) Tensorflow == 1.12.0
+    (1) tensorflow-gpu == 1.12.0
     (2) 'image_data_format' = 'channels_first' in keras.json config
     (3) Data shape = (trials, kernels, channels, samples), which for the 
         input layer, will be (trials, 1, channels, samples).

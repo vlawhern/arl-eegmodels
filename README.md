@@ -8,7 +8,7 @@ This is the Army Research Laboratory (ARL) EEGModels project: A Collection of Co
 # Requirements
 
 - Python (either 2.7 or 3.6)
-- Tensorflow == 1.12.0
+- tensorflow-gpu == 1.12.0
 - Keras variable 'image_data_format' = "channels_first" in keras.json configuration file
 - Data shape = (trials, kernels, channels, samples), which for the input layer, will be (trials, 1, channels, samples). 
 
