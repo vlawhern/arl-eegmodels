@@ -56,8 +56,8 @@ from tensorflow.keras import backend as K
 
 
 def EEGNet(nb_classes, Chans = 64, Samples = 128, 
-             dropoutRate = 0.25, kernLength = 64, F1 = 4, 
-             D = 2, F2 = 8, norm_rate = 0.25, dropoutType = 'Dropout'):
+             dropoutRate = 0.5, kernLength = 64, F1 = 8, 
+             D = 2, F2 = 16, norm_rate = 0.25, dropoutType = 'Dropout'):
     """ Keras Implementation of EEGNet
     http://iopscience.iop.org/article/10.1088/1741-2552/aace8c/meta
 
@@ -91,11 +91,10 @@ def EEGNet(nb_classes, Chans = 64, Samples = 128,
     kernel lengths for double the sampling rate, etc). Note that we haven't 
     tested the model performance with this rule so this may not work well. 
     
-    The model with default parameters gives the EEGNet-4,2 model as discussed
-    in the paper. This model should do pretty well in general, although as the
-    paper discussed the EEGNet-8,2 (with 8 temporal kernels and 2 spatial
-    filters per temporal kernel) can do slightly better on the SMR dataset.
-    Other variations that we found to work well are EEGNet-4,1 and EEGNet-8,1.
+    The model with default parameters gives the EEGNet-8,2 model as discussed
+    in the paper. This model should do pretty well in general, although it is
+	advised to do some model searching to get optimal performance on your
+	particular dataset.
 
     We set F2 = F1 * D (number of input filters = number of output filters) for
     the SeparableConv2D layer. We haven't extensively tested other values of this
@@ -113,7 +112,7 @@ def EEGNet(nb_classes, Chans = 64, Samples = 128,
                         since the data was high-passed at 4Hz we used a kernel
                         length of 32.     
       F1, F2          : number of temporal filters (F1) and number of pointwise
-                        filters (F2) to learn. Default: F1 = 4, F2 = F1 * D. 
+                        filters (F2) to learn. Default: F1 = 8, F2 = F1 * D. 
       D               : number of spatial filters to learn within each temporal
                         convolution. Default: D = 2
       dropoutType     : Either SpatialDropout2D or Dropout, passed as a string.
