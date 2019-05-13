@@ -5,10 +5,10 @@
      https://martinos.org/mne/stable/manual/sample_dataset.html#ch-sample-data
    
  The four classes used from this dataset are:
-     LA: Left-ear auditory response
-     RA: Right-ear auditory response
-     LV: Left visual field response
-     RV: Right visual field response
+     LA: Left-ear auditory stimulation
+     RA: Right-ear auditory stimulation
+     LV: Left visual field stimulation
+     RV: Right visual field stimulation
 
  The code to process, filter and epoch the data are originally from Alexandre
  Barachant's PyRiemann [3] package, released under the BSD 3-clause. A copy of 
