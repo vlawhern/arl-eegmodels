@@ -75,6 +75,7 @@ from mne.datasets import sample
 from EEGModels import EEGNet
 from tensorflow.keras import utils as np_utils
 from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras import backend as K
 
 # PyRiemann imports
 from pyriemann.estimation import XdawnCovariances
@@ -86,6 +87,9 @@ from sklearn.linear_model import LogisticRegression
 # tools for plotting confusion matrices
 from matplotlib import pyplot as plt
 
+# while the default tensorflow ordering is 'channels_last' we set it here
+# to be explicit in case if the user has changed the default ordering
+K.set_image_data_format('channels_last')
 
 ##################### Process, filter and epoch the data ######################
 data_path = sample.data_path()
@@ -133,9 +137,9 @@ Y_test       = np_utils.to_categorical(Y_test-1)
 
 # convert data to NCHW (trials, kernels, channels, samples) format. Data 
 # contains 60 channels and 151 time-points. Set the number of kernels to 1.
-X_train      = X_train.reshape(X_train.shape[0], kernels, chans, samples)
-X_validate   = X_validate.reshape(X_validate.shape[0], kernels, chans, samples)
-X_test       = X_test.reshape(X_test.shape[0], kernels, chans, samples)
+X_train      = X_train.reshape(X_train.shape[0], chans, samples, kernels)
+X_validate   = X_validate.reshape(X_validate.shape[0], chans, samples, kernels)
+X_test       = X_test.reshape(X_test.shape[0], chans, samples, kernels)
    
 print('X_train shape:', X_train.shape)
 print(X_train.shape[0], 'train samples')
