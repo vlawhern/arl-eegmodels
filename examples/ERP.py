@@ -135,7 +135,7 @@ Y_train      = np_utils.to_categorical(Y_train-1)
 Y_validate   = np_utils.to_categorical(Y_validate-1)
 Y_test       = np_utils.to_categorical(Y_test-1)
 
-# convert data to NCHW (trials, kernels, channels, samples) format. Data 
+# convert data to NHWC (trials, channels, samples, kernels) format. Data 
 # contains 60 channels and 151 time-points. Set the number of kernels to 1.
 X_train      = X_train.reshape(X_train.shape[0], chans, samples, kernels)
 X_validate   = X_validate.reshape(X_validate.shape[0], chans, samples, kernels)
