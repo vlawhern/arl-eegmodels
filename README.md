@@ -54,6 +54,8 @@ predicted      = model.predict(...)
 
 # EEGNet Feature Explainability
 
+Note: Please see https://github.com/vlawhern/arl-eegmodels/issues/29 for additional steps needed to get this to work with Tensorflow 2.
+
 To reproduce the EEGNet single-trial feature relevance results as we reported in [[1]](http://stacks.iop.org/1741-2552/15/i=5/a=056013), download and install DeepExplain located [[here]](https://github.com/marcoancona/DeepExplain), which implements a variety of relevance attribution methods (both gradient-based and perturbation-based). A sketch of how to use it is given below:
 
 ```python
